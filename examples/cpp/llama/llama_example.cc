@@ -46,6 +46,7 @@ int main(int argc, char* argv[])
     else {
         ini_name = "../examples/cpp/llama/llama_config.ini";
     }
+    std::cout << "[INFO] Using config: " << ini_name << "\n";
 
     INIReader reader = INIReader(ini_name);
     if (reader.ParseError() < 0) {
@@ -53,6 +54,7 @@ int main(int argc, char* argv[])
         return -1;
     }
     const std::string data_type = reader.Get("ft_instance_hyperparameter", "data_type");
+    std::cout << "[INFO] Data type: " << data_type << "\n";
 
     if (data_type == "fp32") {
         llama_example<float>(reader);
