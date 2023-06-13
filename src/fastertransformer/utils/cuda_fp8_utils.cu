@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "stdio.h"
 #include "cuda_fp8_utils.h"
 
 namespace fastertransformer {
@@ -96,7 +97,7 @@ __global__ void computeFP8QuantizeScale(float* quant_ptr, const T_W* weights, co
         float val = fabs((float)weights[i * n + blockIdx.x * blockDim.x + threadIdx.x]);
         max       = max > val ? max : val;
         if (threadIdx.x == 0 && blockIdx.x == 0 && i % 100 == 0) {
-            printf("max: %f, val: %f \n", max, val);
+		printf("max: %f, val: %f \n", max, val);
         }
     }
     // quant_ptr[blockIdx.x * blockDim.x + threadIdx.x] = 1.0f;
